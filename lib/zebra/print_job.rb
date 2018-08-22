@@ -29,8 +29,7 @@ module Zebra
 
     def send_to_printer(path)
       puts "* * * * * * * * * * * * Sending file to printer #{@printer} at #{@remote_ip} * * * * * * * * * * "
-      result = system("rlpr -H #{@remote_ip} -P #{@printer} -o raw #{path} 2>&1") # try printing to LPD on windows machine first
-      system("lp -h #{@remote_ip} -d #{@printer} -o raw #{path}") if !result # print to unix (CUPS) if rlpr failed
+      `lp -h #{@remote_ip} -d #{@printer} -o raw #{path}`
     end
   end
 end
